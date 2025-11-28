@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>水槽</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="phone-frame">
+        <div id="status-bar">
+      <img src="images/status_bar.png" alt="status bar" />
+    </div>
+<div id="scroll-container">
+  <canvas id="aquarium"></canvas>
+</div>
+
+
+<!-- RIGHT SIDE MENU -->
+<div id="side-menu">
+  <!-- Task button (opens modal) -->
+  <button type="button" class="side-btn" id="task-btn">
+    <img src="images/side/task_nor.png" class="side-icon-img" data-on="images/side/task_on.png" data-off="images/side/task_nor.png">
+    <span class="side-label">タスク</span>
+  </button>
+
+<button type="button" class="side-btn" id="shop-btn">
+  <img src="images/side/shop_nor.png" class="side-icon-img"
+       data-on="images/side/shop_on.png" data-off="images/side/shop_nor.png">
+  <span class="side-label">ショップ</span>
+</button>
+
+<button type="button" class="side-btn" id="storage-btn">
+  <img src="images/side/storage_nor.png" class="side-icon-img"
+       data-on="images/side/storage_on.png" data-off="images/side/storage_nor.png">
+  <span class="side-label">倉庫</span>
+</button>
+
+  <a href="clean.html" class="side-btn">
+    <img src="images/side/clean_nor.png" class="side-icon-img" data-on="images/side/clean_on.png" data-off="images/side/clean_nor.png">
+    <span class="side-label">掃除</span>
+  </a>
+</div>
+
+<!-- 🔹 TASK POPUP (PNG) -->
+<div id="task-popup" class="task-popup">
+  <div class="task-popup-inner">
+    <img src="images/task_popup.png" alt="タスク" class="task-popup-img" id="task-popup-img">
+  </div>
+</div>
+
+<!-- SHOP FULL PAGE -->
+<div id="shop-fullpage">
+  <img src="images/shop_full.jpg" alt="Shop Page" id="shop-fullpage-img">
+</div>
+
+
+<!-- STORAGE BOTTOM SHEET -->
+<div id="storage-panel">
+  <img src="images/storage_panel.png" alt="Storage panel" id="storage-panel-img">
+</div>
+
+    <!-- Bottom menu bar -->
+<nav id="bottom-nav">
+  <a href="diary.html" class="nav-item">
+    <img src="images/icon/note_nor.png" class="nav-icon" alt="日記" />
+    <span class="nav-label">日記</span>
+  </a>
+
+  <a href="index.html" class="nav-item active">
+    <img src="images/icon/tank_on.png" class="nav-icon" alt="水槽" />
+    <span class="nav-label">水槽</span>
+  </a>
+
+  <a href="archive.html" class="nav-item">
+    <img src="images/icon/archive_nor.png" class="nav-icon" alt="アーカイブ" />
+    <span class="nav-label">アーカイブ</span>
+  </a>
+
+  <a href="settings.html" class="nav-item">
+    <img src="images/icon/set_nor.png" class="nav-icon" alt="設定" />
+    <span class="nav-label">設定</span>
+  </a>
+</nav>
+  </div>
+
+  <!-- JS only on aquarium page -->
+  <script src="script.js"></script>
+</body>
+</html>

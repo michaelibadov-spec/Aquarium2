@@ -1,0 +1,362 @@
+/* reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#scroll-container, #phone-frame, body {
+    background: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* phone frame */
+#phone-frame {
+  position: relative;
+  width: 360px;
+  height: 700px;              /* script.js uses this height */
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* scroll area with canvas */
+#scroll-container {
+  flex: 1 1 auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+/* hide scrollbars */
+#scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+#scroll-container {
+  scrollbar-width: none;
+}
+
+/* canvas */
+#aquarium {
+  display: block;
+}
+
+/* bottom nav bar */
+#bottom-nav {
+  flex: 0 0 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #f7f7f7;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* buttons inside nav */
+.nav-item {
+  flex: 1;
+  height: 100%;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #999999;
+  cursor: pointer;
+}
+
+/* icon images */
+.nav-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
+}
+
+/* label text */
+.nav-label {
+  line-height: 1;
+}
+
+/* full-page background container for non-aquarium pages */
+.page-bg {
+  width: 360px;
+  height: 770px;              /* script.js uses this height */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* each page uses different image */
+.page-bg-diary {
+  background-image: url("images/diary_bg.jpg");
+}
+
+.page-bg-archive {
+  background-image: url("images/archive_bg.jpg");
+}
+
+.page-bg-settings {
+  background-image: url("images/settings_bg.jpg");
+}
+
+/* nav items are links (<a>), remove underline */
+.nav-item {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* active tab text color */
+.nav-item.active {
+  color: #2196f3;
+}
+
+/* soft glowing effect for active icon */
+.nav-item.active .nav-icon {
+  filter: drop-shadow(0 0 10px rgba(100, 180, 255, 0.7));
+  transform: scale(1.05);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.nav-item.active .nav-label {
+  text-shadow: 0 0 10px rgba(100, 180, 255, 0.6);
+  color: #2196f3;
+}
+
+/* Active nav item: grow + soft motion */
+.nav-item.active {
+  transform: scale(1.12);
+  transition: transform 0.35s ease, color 0.3s ease;
+}
+
+.nav-item.active .nav-icon {
+  filter: drop-shadow(0 0 8px rgba(120, 190, 255, 0.75));
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.nav-item.active .nav-label {
+  transform: scale(1.05);
+  text-shadow: 0 0 6px rgba(120, 190, 255, 0.6);
+  transition: transform 0.4s ease, text-shadow 0.4s ease;
+}
+
+
+
+/* top status bar overlays on top of content */
+#status-bar {
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 390px;
+  height: 52px;          /* adjust if your PNG is taller */
+  padding: 4px 8px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  pointer-events: none;  /* taps go through to the canvas/content */
+  background: transparent;
+  z-index: 10;
+}
+
+/* make image stretch nicely */
+#status-bar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;     /* shows full PNG without distortion */
+  display: block;
+}
+/* ----- RIGHT SIDE MENU (Aquarium Page) ----- */
+#side-menu {
+  position: absolute;
+  top: 90px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 9;
+  pointer-events: none;
+}
+
+/* ===== SIDEBAR HOVER EFFECT ===== */
+.side-icon-img {
+  transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 50%;   /* make glow perfectly round */
+}
+
+/* Hover effect ON THE ICON ONLY */
+.side-icon-img {
+  border-radius: 50%;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+/* hover */
+.side-btn:hover .side-icon-img {
+  transform: scale(1.08);
+  /* brightness + glow in ONE filter */
+  filter: brightness(1.05) drop-shadow(0 0 4px rgba(140, 210, 255, 0.8));
+}
+
+/* ===== SHOP FULL PAGE ===== */
+#shop-fullpage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 64px;         /* stop above the bottom nav */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  background: #fff;   /* or transparent if your PNG has full bg */
+  opacity: 0;         /* start invisible */
+  pointer-events: none;
+  transition: opacity 0.35s ease;  /* fade only */
+  z-index: 20;
+}
+
+#shop-fullpage.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#shop-fullpage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+/* ----- STORAGE BOTTOM SHEET ----- */
+#storage-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 64px;                 /* just above the bottom nav (which is 64px high) */
+  display: flex;
+  justify-content: center;
+
+  transform: translateY(100%);  /* start hidden below */
+  opacity: 0;
+  pointer-events: none;         /* cannot click when hidden */
+
+  transition: transform 0.35s ease-out, opacity 0.35s ease-out;
+  z-index: 12;                  /* above fish and side buttons */
+}
+
+#storage-panel img {
+  width: 100%;
+  max-width: 360px;             /* same as phone width */
+  height: auto;
+  display: block;
+}
+
+/* visible state (slide up + fade in) */
+#storage-panel.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;         /* can tap when visible */
+}
+
+.side-btn {
+  border: none;
+  outline: none;
+}
+
+.side-btn:focus {
+  outline: none;
+}
+
+.side-btn:active {
+  outline: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+
+.side-btn {
+  pointer-events: auto;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.side-icon-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.side-btn.active .side-icon-img {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 8px rgba(120, 190, 255, 0.8));
+}
+
+.side-label {
+  text-shadow: 0 0 4px rgba(0,0,0,0.6);
+}
+/* ===== TASK POPUP (PNG MODAL) ===== */
+/* ===== TASK POPUP (PNG MODAL, FADE IN/OUT) ===== */
+.task-popup {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);  /* darkness */
+  z-index: 20;
+
+  opacity: 0;              /* start invisible */
+  pointer-events: none;    /* can’t click when hidden */
+  transition: opacity 0.35s ease;  /* smooth fade for darkness + image */
+}
+
+/* visible state */
+.task-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.task-popup-inner {
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-popup-img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;     /* optional */
+}
